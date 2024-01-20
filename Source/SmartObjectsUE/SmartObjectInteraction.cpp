@@ -88,6 +88,9 @@ void USmartObjectInteraction::UseCurrentContext() const
 		SmartObjectSubsystem->Use<UGameplayBehaviorSmartObjectBehaviorDefinition>(CurrentContext->ClaimHandle.GetValue());
 	
 	UGameplayBehavior* GameplayBehaviour = BehaviorDefinition->GameplayBehaviorConfig->GetBehavior(*GetWorld());
+	CurrentContext->GameplayBehavior = GameplayBehaviour;
+
+	
 	GameplayBehaviour->Trigger(*GetMyPawn(), BehaviorDefinition->GameplayBehaviorConfig, CurrentContext->OwningActor);
 }
 
@@ -97,6 +100,8 @@ void USmartObjectInteraction::ReleaseCurrentContext() const
 	{
 		USmartObjectSubsystem* SmartObjectSubsystem = GetWorld()->GetSubsystem<USmartObjectSubsystem>();
 		SmartObjectSubsystem->Release(CurrentContext->ClaimHandle.GetValue());
+
+		CurrentContext->GameplayBehavior.GetValue()->EndBehavior(*CurrentContext->Occupant, false);
 	}
 	else
 	{

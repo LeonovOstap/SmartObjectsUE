@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "CoreMinimal.h"
+#include "GameplayBehavior.h"
 #include "SmartObjectSubsystem.h"
 
 #include "InteractionTypes.generated.h"
@@ -17,6 +18,7 @@ struct FSmartObjectContext
 
 	TOptional<FSmartObjectRequestResult> RequestResult;
 	TOptional<FSmartObjectClaimHandle> ClaimHandle;
+	TOptional<UGameplayBehavior*> GameplayBehavior;
 
 	bool operator==(const FSmartObjectContext& Other) const
 	{
