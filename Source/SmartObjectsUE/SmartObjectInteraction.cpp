@@ -68,14 +68,14 @@ void USmartObjectInteraction::ClaimAndUseCurrentContext()
 
 	TOptional<FTransform> SlotTransform = SmartObjectSubsystem->GetSlotTransform(CurrentContext->ClaimHandle.GetValue());
 	
-	UInteractionFunctionLibrary::AsyncMoveTo(GetMyPawn(), SlotTransform.GetValue().GetLocation(), FOnMoveFinished::CreateWeakLambda(this,
-		[this](bool bSuccess)
-		{
-			if(bSuccess)
-			{
-				UseCurrentContext();
-			}
-		}));
+	UInteractionFunctionLibrary::AsyncMoveTo(GetMyPawn(), SlotTransform.GetValue(), FOnMoveFinished::CreateWeakLambda(this,
+		                                         [this](bool bSuccess)
+		                                         {
+			                                         if(bSuccess)
+			                                         {
+				                                         UseCurrentContext();
+			                                         }
+		                                         }));
 }
 
 void USmartObjectInteraction::UseCurrentContext() const

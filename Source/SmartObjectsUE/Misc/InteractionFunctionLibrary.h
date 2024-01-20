@@ -18,5 +18,5 @@ class SMARTOBJECTSUE_API UInteractionFunctionLibrary : public UBlueprintFunction
 	GENERATED_BODY()
 
 public:
-	static void AsyncMoveTo(APawn* Pawn, FVector Location, const FOnMoveFinished& OnMoveFinished);
+	static void AsyncMoveTo(APawn* Pawn, const FTransform& Transform, const FOnMoveFinished& OnMoveFinished);
 };
